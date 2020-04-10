@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    <title>Los Rancheros de Sombreros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./jquery.loading.css">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="gallery"></div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="./jquery.loading.js"></script>
+    <script  src="./script.js"></script>
+    <script>
+      $( document ).ready(function() {
+        console.log('Los Rancheros de Sombreros Loading....');
+        $('body').loading();
+        $.ajax({
+          url: 'https://api.github.com/repos/aldodelgado/aldodelgado.github.io/contents/assets/photos',
+          success: function (data) {
+            const photos = data.map(function (el) {
+              return el.download_url;
+            });
+            const new_photos = shuffle(photos);
+            new_photos.forEach(function(photo) {
+              $(".gallery").append( "<img src='"+ photo +"'>" );
+            });
+            setTimeout(function(){
+              scaleGallery();
+              $('body').loading('stop');
+            }, 1000);
+          }
+        });
+        console.log('Los Rancheros de Sombreros Loaded....');
+      });
+    </script>
+  </body>
+</html>

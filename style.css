@@ -1,0 +1,10 @@
+body {
+  background-color: black;
+  padding: 2px 0 0 2px;
+}
+
+.gallery img {
+  float: left;
+  padding: 0 0px 0px 0;
+  /* Yes, you *can* adjust/remove padding. */
+}
